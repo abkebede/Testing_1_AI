@@ -1,0 +1,28 @@
+import openai
+
+# Set your OpenAI API key
+openai.api_key = 'your API Key'
+
+def ask_chatgpt(question, model="text-davinci-002"):
+    """Ask a question to ChatGPT."""
+    response = openai.Completion.create(
+        engine=model,
+        prompt=question,
+        temperature=0.7,
+        max_tokens=150
+    )
+    return response.choices[0].text.strip()
+
+def main():
+    print("Welcome to ChatGPT!")
+    print("Type 'exit' to end the conversation.")
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == 'exit':
+            print("Goodbye!")
+            break
+        response = ask_chatgpt(user_input)
+        print("ChatGPT: " + response)
+
+if __name__ == "__main__":
+    main()
